@@ -1,29 +1,42 @@
-// controllers/authController.js
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-exports.register = async (req, res) => {
-  const { username, email, password } = req.body;
-  try {
-    let user = await User.findOne({ email });
-    if (user) return res.status(400).json({ msg: 'User already exists' });
-    user = new User({ username, email, password: await bcrypt.hash(password, 10) });
-    await user.save();
-    res.status(201).json({ msg: 'User registered successfully' });
-  } catch (err) {
-    res.status(500).json({ msg: 'Server error' });
-  }
+const generateToken = require('../utils/generateToken');
+
+const registerUser = async (req, res) => {
+    const { name, email, password } = req.body;
+    const userExists = await User.findOne({ email });
+
+    if (userExists) {
+        return res.status(400).json({ message: 'User already exists' });
+    }
+
+    const user = await User.create({ name, email, password });
+
+    if (user) {
+        res.status(201).json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            token: generateToken(user._id),
+        });
+    } else {
+        res.status(400).json({ message: 'Invalid user data' });
+    }
 };
-exports.login = async (req, res) => {
-  const { email, password } = req.body;
-  try {
+
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
-    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token, user: { id: user._id, username: user.username, role: user.role } });
-  } catch (err) {
-    res.status(500).json({ msg: 'Server error' });
-  }
+
+    if (user && (await user.matchPassword(password))) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            token: generateToken(user._id),
+        });
+    } else {
+        res.status(401).json({ message: 'Invalid email or password' });
+    }
 };
+
+module.exports = { registerUser, loginUser };
