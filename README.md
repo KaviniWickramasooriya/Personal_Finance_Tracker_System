@@ -3,7 +3,7 @@
 
 # Finance Tracker 💰
 
-Finance Tracker is a personal finance management system built using **Node.js**, **Express.js**, **MongoDB**, and **JWT authentication**. This application allows users to **track expenses, set budgets, analyze spending trends**, and generate financial reports. Multi-currency support is integrated using SerpAPI's Google Search for real-time currency conversion.
+Finance Tracker is a personal finance management system built using **Node.js**, **Express.js**, **MongoDB**, and **JWT authentication**. This application allows users to **track expenses, set budgets, analyze spending trends**, and generate financial reports. Multi-currency support is integrated using [SerpAPI's Google Search](https://serpapi.com/) for real-time currency conversion.
 
 ## 🚀 Features
 - **User Authentication (JWT)**
