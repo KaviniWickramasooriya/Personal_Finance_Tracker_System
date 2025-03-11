@@ -1,3 +1,8 @@
+<<<<<<< Updated upstream
+=======
+[Report - Google Drive Link](https://drive.google.com/file/d/1CZw34n3LGe1XIEQT1Zw590_FLE3jz0OR/view?usp=sharing)
+
+>>>>>>> Stashed changes
 # Finance Tracker 💰
 
 Welcome to **Finance Tracker**, a secure and efficient **personal finance management system** built using **Node.js**, **Express.js**, **MongoDB**, and **JWT authentication**. This application enables users to **track expenses, set budgets, analyze spending trends, and generate financial reports**. Multi-currency support is integrated using **SerpAPI** for real-time currency conversion.
@@ -149,4 +154,8 @@ To ensure robustness, the application includes:
 Run tests using:
 ```bash
 npm test
+<<<<<<< Updated upstream
 ```
+=======
+```
+>>>>>>> Stashed changes
