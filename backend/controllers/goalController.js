@@ -1,5 +1,6 @@
 const Goal = require("../models/Goal");
 
+// Create Goal
 exports.createGoal = async (req, res) => {
     try {
         const { title, targetAmount, deadline } = req.body;
@@ -13,6 +14,7 @@ exports.createGoal = async (req, res) => {
     }
 };
 
+// Get Goals
 exports.getGoals = async (req, res) => {
     try {
         const goals = await Goal.find({ user: req.user.id });
@@ -22,6 +24,7 @@ exports.getGoals = async (req, res) => {
     }
 };
 
+// Update Goal
 exports.updateGoal = async (req, res) => {
     try {
         const { savedAmount } = req.body;
@@ -38,6 +41,7 @@ exports.updateGoal = async (req, res) => {
     }
 };
 
+// Delete Goal
 exports.deleteGoal = async (req, res) => {
     try {
         await Goal.findByIdAndDelete(req.params.id);

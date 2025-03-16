@@ -6,36 +6,50 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
+    },
+    tls: {
+        rejectUnauthorized: false  
     }
 });
 
-// ✅ Function to Send an Email with Custom HTML Template
+// ✅ Function to Send an Email with a Modern Design
 const sendEmail = async (to, subject, financialData, pdfBuffer) => {
     const { totalIncome, totalExpenses, netBalance } = financialData;
 
     const emailHTML = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
-        <h2 style="text-align: center; color: #4CAF50;">📊 Finance Tracker Report</h2>
-        <p>Hello,</p>
-        <p>Here is your latest financial summary:</p>
-        <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-                <td style="padding: 10px; font-weight: bold;">Total Income:</td>
-                <td style="padding: 10px; color: green;">$${totalIncome}</td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; font-weight: bold;">Total Expenses:</td>
-                <td style="padding: 10px; color: red;">$${totalExpenses}</td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; font-weight: bold;">Net Balance:</td>
-                <td style="padding: 10px; color: ${netBalance >= 0 ? 'green' : 'red'};">$${netBalance}</td>
-            </tr>
-        </table>
-        <p>Attached is your full financial report in PDF format.</p>
-        <p>Thank you for using Finance Tracker!</p>
-        <footer style="text-align: center; color: #777; font-size: 12px;">
-            <p>© ${new Date().getFullYear()} Finance Tracker App</p>
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; border: 1px solid #ddd; background-color: #f9f9f9;">
+        <div style="background-color: #222; padding: 15px; text-align: center; border-radius: 10px 10px 0 0;">
+            <h2 style="color: #ffffff; margin: 0;">📊 Financial Report Summary</h2>
+        </div>
+        <div style="padding: 20px; background-color: #ffffff;">
+            <p style="font-size: 16px; color: #333;">Dear User,</p>
+            <p style="font-size: 15px; color: #555;">Here’s a quick summary of your financial status:</p>
+
+            <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                <tr>
+                    <td style="padding: 12px; font-weight: bold;">💰 Total Income:</td>
+                    <td style="padding: 12px; color: green; font-weight: bold;">$${totalIncome}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; font-weight: bold;">💸 Total Expenses:</td>
+                    <td style="padding: 12px; color: red; font-weight: bold;">$${totalExpenses}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; font-weight: bold;">📈 Net Balance:</td>
+                    <td style="padding: 12px; color: ${netBalance >= 0 ? 'green' : 'red'}; font-weight: bold;">$${netBalance}</td>
+                </tr>
+            </table>
+
+            <p style="font-size: 14px; color: #555;">For a detailed breakdown, please refer to the attached PDF report.</p>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <a href="#" style="background-color: #4CAF50; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">📂 Download Report</a>
+            </div>
+
+            <p style="font-size: 14px; color: #555;">Thank you for using <strong>Finance Tracker</strong>!</p>
+        </div>
+        <footer style="text-align: center; color: #777; font-size: 12px; padding: 10px;">
+            <p>© ${new Date().getFullYear()} Finance Tracker App | All rights reserved</p>
         </footer>
     </div>`;
 

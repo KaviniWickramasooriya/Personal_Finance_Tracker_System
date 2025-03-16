@@ -2,10 +2,23 @@ const mongoose = require('mongoose');
 const Transaction = require('./Transaction');
 
 const budgetSchema = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    category: { type: String, required: true },
-    limit: { type: Number, required: true },
-    spent: { type: Number, default: 0 }
+    user: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User', 
+        required: true 
+    },
+    category: { 
+        type: String, 
+        required: true 
+    },
+    limit: { 
+        type: Number, 
+        required: true 
+    },
+    spent: { 
+        type: Number, 
+        default: 0 
+    }
 });
 
 // Function to Recalculate Spent Amount

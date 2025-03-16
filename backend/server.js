@@ -7,7 +7,7 @@ const userRoutes = require('./routes/userRoutes');
 const budgetRoutes = require('./routes/budgetRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
 const reportRoutes = require('./routes/transactionReportRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
+const categoryRoute = require('./routes/categoryRoutes');
 const goalRoutes = require('./routes/goalRoutes');
 
 dotenv.config();
@@ -21,8 +21,16 @@ app.use('/api/users', userRoutes);
 app.use('/api/budgets', budgetRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/reports', reportRoutes);
-app.use('/api/categories', categoryRoutes);
+app.use('/api/categories',categoryRoute);
 app.use('/api/goals', goalRoutes);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+if (process.env.NODE_ENV !== "test") {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+module.exports = app;

@@ -1,5 +1,6 @@
 const Category =  require('../models/Category');
 
+// Add Category
 const addCategory = async (req,res) => {
     try {
         const {categoryType} = req.body;
@@ -25,6 +26,7 @@ const addCategory = async (req,res) => {
     }
 };
 
+// Get Category
 const getCategory = async (req, res) => {
     try {
         const categories = await Category.find()
@@ -35,6 +37,7 @@ const getCategory = async (req, res) => {
     }
 }
 
+// Update Category
 const updateCategory = async (req, res) => {
     try{
         const category =  await Category.findById(req.params.id);
@@ -53,6 +56,7 @@ const updateCategory = async (req, res) => {
     }
 };
 
+// Delete Category
 const deleteCategory = async (req, res) => {
     try {
         const category = await Category.findById(req.params.id);
@@ -66,7 +70,5 @@ const deleteCategory = async (req, res) => {
         res.status(500).json({message:'Error deleteing category', error});
     }
 }
-
-
 
 module.exports = {addCategory, getCategory, updateCategory, deleteCategory};

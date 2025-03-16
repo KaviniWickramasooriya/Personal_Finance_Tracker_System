@@ -51,7 +51,6 @@ const addTransaction = async (req, res) => {
     }
 };
 
-
 //  Get Transactions (User can see their own, Admin can see all)
 const getTransactions = async (req, res) => {
     try {

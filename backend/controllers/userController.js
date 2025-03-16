@@ -10,10 +10,15 @@ const getUsers = async (req, res) => {
     }
 };
 
-// Get Single User by ID
+// Get Single User by ID (Modified)
 const getUserById = async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req.params.id, role: 'user' }).select('-password');
+        // Check if the user is trying to access their own data or an admin is accessing any user's data
+        if (req.user._id.toString() !== req.params.id && req.user.role !== 'admin') {
+            return res.status(403).json({ message: 'Access denied, you can only access your own data' });
+        }
+
+        const user = await User.findOne({ _id: req.params.id }).select('-password'); // User can only see their own details or admin can see anyone
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
