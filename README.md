@@ -1,10 +1,8 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/xIbq4TFL)
-
 ## 📃 Document
 
 [Google Drive Link](https://drive.google.com/file/d/1CZw34n3LGe1XIEQT1Zw590_FLE3jz0OR/view?usp=sharing)
 
-# Finance Tracker 💰
+# Finance Tracker System 💰
 
 Welcome to **Finance Tracker**, a secure and efficient **personal finance management system** built using **Node.js**, **Express.js**, **MongoDB**, and **JWT authentication**. This application enables users to **track expenses, set budgets, analyze spending trends, and generate financial reports**. Multi-currency support is integrated using **SerpAPI** for real-time currency conversion.
 
